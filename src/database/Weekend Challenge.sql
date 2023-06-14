@@ -1,6 +1,6 @@
 --Weekend Chalenge
-CREATE DATABASE LibraryManagement
-USE LibraryManagement
+CREATE DATABASE Library_Management
+USE Library_Management
 
 --Tables
 CREATE TABLE Books(
@@ -11,7 +11,7 @@ CREATE TABLE Books(
 	Status VARCHAR(50)
 );
 
-UPDATE Members(
+CREATE TABLE Members(
 	MemberID INT PRIMARY KEY,
 	Name VARCHAR(255),
 	Address VARCHAR(50),
