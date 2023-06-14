@@ -1,13 +1,8 @@
 const express = require('express');
-const { getAllBooks, getAllMembers, registerMember, getMemberById } = require('../controllers/controllers.js');
+const { getAllBooks } = require('../controllers/controllers');
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/books', getAllBooks)
-router.get('/members',getAllMembers)
-router.post('/members',registerMember)
-router.get('/members/:id', getMemberById);
-
-
+router.get('/', getAllBooks)
 
 module.exports = router;
