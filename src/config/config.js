@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const Config = {
     user: process.env.DB_USER,
     password: process.env.DB_PWD,
@@ -10,7 +12,7 @@ const Config = {
     },
     options: {
         encrypt: true, // for azure
-        trustServerCertificate: false // change to true for local dev / self-signed certs
+        trustServerCertificate: true // change to true for local dev / self-signed certs
     }
     }
     
