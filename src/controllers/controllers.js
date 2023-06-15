@@ -5,9 +5,9 @@ async function borrowBook(req, res) {
   try {
     const bookID = req.params.id;
 
-    const pool = await mssql.connect(config);
+    const sql = await mssql.connect(config);
 
-    const result = await pool
+    const result = await sql
       .request()
       .input('bookID', mssql.Int, bookID)
       .query(`UPDATE dbo.Books
@@ -28,9 +28,9 @@ async function returnBook(req, res) {
   try {
     const bookID = req.params.id;
 
-    const pool = await mssql.connect(config);
+    const sql = await mssql.connect(config);
 
-    const result = await pool
+    const result = await sql
       .request()
       .input('bookID', mssql.Int, bookID)
       .query(`UPDATE dbo.Books
