@@ -7,29 +7,6 @@ async function borrowBook(req, res) {
 
     const sql = await mssql.connect(config);
 
-
-
-// async function registerMember(req, res) {
-//   try {
-//     const {MemberID, Name, Address, ContactNumber } = req.body;
-
-//     // Validate the input data (e.g., check for required fields, format validation, etc.)
-
-
-//     if (sql.connected) {
-//       // Insert the new member into the Members table
-//       const result = await sql.query(
-//         `INSERT INTO dbo.Members (MemberID, Name, Address, ContactNumber) VALUES ('${MemberID}', '${Name}', '${Address}', '${ContactNumber}')`
-//       );
-
-//       res.status(201).json({ message: 'Member registered successfully', memberID });
-//     }
-//   } catch (error) {
-//     console.error('Error registering member:', error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// }
-
 async function registerMember(req, res) {
   try {
     const { MemberId, Name, Address, ContactNumber } = req.body;

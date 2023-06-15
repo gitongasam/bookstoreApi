@@ -7,11 +7,11 @@ const app = express();
 app.use(express.json());
 
 app.get('/', (req, res) =>{
-    res.send('sam')
+    res.send('chris')
 })
 
 app.use(router)
 
-const port = 5003;
+const port = 3000;
 
 app.listen(port, ()=>console.log(`Server is listening at port ${port}`));
