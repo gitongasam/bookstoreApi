@@ -1,14 +1,52 @@
 const mssql = require('mssql');
-const config = require('../config/config')
+const config = require('../config/config');
 
-async function getAllBooks(req, res){
-    let sql = await mssql.connect(config);
-    if(sql.connected){
-        let results = await sql.query(`SELECT * FROM dbo.BOOKS`)
-        console.log(results);
-    }
-    res.send('Books...')
+async function borrowBook(req, res) {
+  try {
+    const bookID = req.params.id;
+
+    const pool = await mssql.connect(config);
+
+    const result = await pool
+      .request()
+      .input('bookID', mssql.Int, bookID)
+      .query(`UPDATE dbo.Books
+              SET Status = 'Loaned'
+              WHERE BookID = @bookID;
+              SELECT * FROM dbo.Books WHERE BookID = @bookID`);
+
+    const borrowedBook = result.recordset[0];
+    res.status(200).send(`Book borrowed successfully. \n\nBook details: ${JSON.stringify(borrowedBook)}`);
+
+  } catch (error) {
+    console.error('Error borrowing book:', error);
+    res.status(500).send('An error occurred while borrowing the book.');
+  }
 }
+
+async function returnBook(req, res) {
+  try {
+    const bookID = req.params.id;
+
+    const pool = await mssql.connect(config);
+
+    const result = await pool
+      .request()
+      .input('bookID', mssql.Int, bookID)
+      .query(`UPDATE dbo.Books
+              SET Status = 'Available'
+              WHERE BookID = @bookID;
+              SELECT * FROM dbo.Books WHERE BookID = @bookID`);
+    const returnedBook = result.recordset[0];
+    res.status(200).send(`Book returned successfully. \n\nBook details: ${JSON.stringify(returnedBook)}`);
+
+  } catch (error) {
+    console.error('Error returning book:', error);
+    res.status(500).send('An error occurred while returning the book.');
+  }
+}
+
 module.exports = {
-    getAllBooks
-}
+  borrowBook,
+  returnBook,
+};
