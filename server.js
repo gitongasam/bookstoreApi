@@ -12,6 +12,6 @@ app.get('/', (req, res) =>{
 
 app.use(router)
 
-const port = 5000;
+const port = 5002;
 
 app.listen(port, ()=>console.log(`Server is listening at port ${port}`));
